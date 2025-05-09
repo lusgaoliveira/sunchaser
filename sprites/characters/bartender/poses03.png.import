@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gm3ynudov0u6"
-path="res://.godot/imported/TX Player.png-bff3feb5bbf99e687f97e84a43f97720.ctex"
+uid="uid://dbhdup6885142"
+path="res://.godot/imported/poses03.png-b6b3ae4c10f749097c3bdc3dddaa583c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/background/TX Player.png"
-dest_files=["res://.godot/imported/TX Player.png-bff3feb5bbf99e687f97e84a43f97720.ctex"]
+source_file="res://sprites/characters/bartender/poses03.png"
+dest_files=["res://.godot/imported/poses03.png-b6b3ae4c10f749097c3bdc3dddaa583c.ctex"]
 
 [params]
 

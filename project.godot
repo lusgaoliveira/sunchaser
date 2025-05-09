@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Shadowchaser"
-run/main_scene="uid://cui8wxd835qxt"
+run/main_scene="uid://gg58bcvo0xff"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1366
 window/size/viewport_height=768
-window/size/mode=3
 
 [rendering]
 

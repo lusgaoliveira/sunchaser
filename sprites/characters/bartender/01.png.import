@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hkehr1lolidd"
-path="res://.godot/imported/TX Tileset Wall.png-2987d9df4dec7b7fcc60ccab849005ec.ctex"
+uid="uid://dmujjq0hufl20"
+path="res://.godot/imported/01.png-4d975db33618359b696ee1605fd4e7c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/background/TX Tileset Wall.png"
-dest_files=["res://.godot/imported/TX Tileset Wall.png-2987d9df4dec7b7fcc60ccab849005ec.ctex"]
+source_file="res://sprites/characters/bartender/01.png"
+dest_files=["res://.godot/imported/01.png-4d975db33618359b696ee1605fd4e7c4.ctex"]
 
 [params]
 

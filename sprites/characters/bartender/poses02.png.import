@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0wws21vkxqpy"
-path="res://.godot/imported/TX Shadow.png-d446dfebd714aeb66f2cbac1e3d43477.ctex"
+uid="uid://6dvuwpe20osj"
+path="res://.godot/imported/poses02.png-8853c07681b01f2318eedf248a149faa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/background/TX Shadow.png"
-dest_files=["res://.godot/imported/TX Shadow.png-d446dfebd714aeb66f2cbac1e3d43477.ctex"]
+source_file="res://sprites/characters/bartender/poses02.png"
+dest_files=["res://.godot/imported/poses02.png-8853c07681b01f2318eedf248a149faa.ctex"]
 
 [params]
 

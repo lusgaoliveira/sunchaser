@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0e2g5kwnq3ep"
-path="res://.godot/imported/TX Tileset Grass.png-62392646b1d7d247676024eef10151f8.ctex"
+uid="uid://dafnbqnpyipgi"
+path="res://.godot/imported/walk03.png-d514b9b37cabe51ee508966c6106c562.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/background/TX Tileset Grass.png"
-dest_files=["res://.godot/imported/TX Tileset Grass.png-62392646b1d7d247676024eef10151f8.ctex"]
+source_file="res://sprites/characters/bartender/walk03.png"
+dest_files=["res://.godot/imported/walk03.png-d514b9b37cabe51ee508966c6106c562.ctex"]
 
 [params]
 
