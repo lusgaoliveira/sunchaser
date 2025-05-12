@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://2hx2pketj4tr"]
+[gd_scene load_steps=14 format=3 uid="uid://2hx2pketj4tr"]
 
 [ext_resource type="Texture2D" uid="uid://dbhb4wxa8venl" path="res://sprites/characters/bartender/walk02.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://vcq340twyk3c" path="res://characters/player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://doybjkgflycf2" path="res://sprites/characters/bartender/walk01.png" id="3_exd8k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
-radius = 20.0
-height = 106.0
+radius = 16.0
+height = 36.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
 atlas = ExtResource("1_4flbx")
@@ -21,6 +22,22 @@ region = Rect2(0, 512, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
 atlas = ExtResource("1_4flbx")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dc8e"]
+atlas = ExtResource("3_exd8k")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixbpm"]
+atlas = ExtResource("3_exd8k")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6leb"]
+atlas = ExtResource("3_exd8k")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dirf7"]
+atlas = ExtResource("3_exd8k")
 region = Rect2(512, 512, 512, 512)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1jxqw"]
@@ -41,17 +58,34 @@ animations = [{
 "loop": true,
 "name": &"Frente - Baixo",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dc8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixbpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6leb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dirf7")
+}],
+"loop": true,
+"name": &"Frente-Lado-Esquerdo",
+"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(730, 314)
+position = Vector2(692, 369)
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
-position = Vector2(-1.99999, -4.00001)
+position = Vector2(-1.99998, -36)
 scale = Vector2(0.169312, 0.268066)
 sprite_frames = SubResource("SpriteFrames_1jxqw")
 animation = &"Frente - Baixo"
