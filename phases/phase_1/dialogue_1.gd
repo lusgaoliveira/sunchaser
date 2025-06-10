@@ -17,7 +17,7 @@ var data: Dictionary = {}
 func _ready() -> void:
 	_initialize_dialog()
 
-func _process(delta: float) -> void:
+func _process(_delta) -> void:
 	if Input.is_action_pressed("ui_accept") and _dialog.visible_characters < 1:
 		_step = 0.01
 		return

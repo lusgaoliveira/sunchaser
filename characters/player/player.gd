@@ -5,8 +5,12 @@ extends CharacterBody2D
 const SPEED = 150.0
 
 var last_direction := ""
+var health := 100
 
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
+	add_to_group("player")
+
+func _physics_process(_delta) -> void:
 	var input_vector := Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"),
@@ -51,3 +55,13 @@ func perform_attack() -> void:
 		_:
 			animation.animation = "attack2"  
 	animation.play()    
+
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	print("Player tomou dano! Vida atual: %d" % health)
+	if health <= 0:
+		die()
+
+func die() -> void:
+	queue_free()

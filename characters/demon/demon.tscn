@@ -279,4 +279,5 @@ position = Vector2(314, 150)
 shape = SubResource("CapsuleShape2D_racfh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(305, 102)
 sprite_frames = SubResource("SpriteFrames_ruift")
