@@ -571,5 +571,6 @@ limit_bottom = 700
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(690, 333)
 scale = Vector2(0.169312, 0.268066)
+skew = 0.0174533
 sprite_frames = SubResource("SpriteFrames_di0ei")
 animation = &"5"

@@ -6,6 +6,7 @@ const SPEED = 150.0
 
 var last_direction := ""
 var health := 100
+var is_attacking := false
 
 func _ready() -> void:
 	add_to_group("player")
@@ -13,16 +14,17 @@ func _ready() -> void:
 func _physics_process(_delta) -> void:
 	var input_vector := Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"),
+		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	).normalized()
 
-	velocity = input_vector * SPEED
-	move_and_slide()
+	if not is_attacking:
+		velocity = input_vector * SPEED
+		move_and_slide()
+		play_animation(input_vector)
 
-	play_animation(input_vector)
-	
-	if Input.is_action_pressed("attack1"):
+	if Input.is_action_just_pressed("attack1") and not is_attacking:
 		perform_attack()
+
 
 func play_animation(direction: Vector2) -> void:
 	if direction == Vector2.ZERO:
@@ -35,26 +37,26 @@ func play_animation(direction: Vector2) -> void:
 			last_direction = "back"
 		elif direction.x > 0:
 			last_direction = "left"
-		else:
+		elif direction.x < 0:
 			last_direction = "right"
+		else:
+			last_direction = "stop"
+
 
 		animation.animation = last_direction
 		animation.play()
 
 func perform_attack() -> void:
-	print("Ataque realizado!")
+	is_attacking = true
 	match last_direction:
 		"front":
 			animation.animation = "load"
-		"back":
+		"back", "left", "right", "stop":
 			animation.animation = "attack2"
-		"left":
-			animation.animation = "attack2"
-		"right":
-			animation.animation = "attack2"
-		_:
-			animation.animation = "attack2"  
-	animation.play()    
+	animation.play()
+	await animation.animation_finished
+	is_attacking = false
+ 
 
 
 func take_damage(amount: int) -> void:
