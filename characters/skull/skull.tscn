@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://b8bwcjpxhmt65"]
+[gd_scene load_steps=56 format=3 uid="uid://b8bwcjpxhmt65"]
 
 [ext_resource type="Texture2D" uid="uid://gohrmff4ea34" path="res://sprites/characters/skull/e1s.png" id="1_2igwj"]
 [ext_resource type="Script" uid="uid://c8lf3ui5hprgx" path="res://characters/skull/skull.gd" id="1_usud0"]
@@ -191,7 +191,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_cissy")
 }],
 "loop": true,
-"name": &"axel",
+"name": &"attack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -389,20 +389,48 @@ animations = [{
 "texture": SubResource("AtlasTexture_otjss")
 }],
 "loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l63f7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnw51")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otjss")
+}],
+"loop": true,
 "name": &"right",
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dalb3"]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_usud0")
-velocidade = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(210, 72)
+position = Vector2(2, 9)
 shape = SubResource("CapsuleShape2D_usud0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(204, 60)
+position = Vector2(-4, -3)
 scale = Vector2(0.28, 0.28)
+skew = 0.0174533
 sprite_frames = SubResource("SpriteFrames_ercmr")
-animation = &"right"
+animation = &"front"
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(50, 50)
+collision_mask = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 1)
+shape = SubResource("CapsuleShape2D_dalb3")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -48,14 +48,21 @@ func play_animation(direction: Vector2) -> void:
 
 func perform_attack() -> void:
 	is_attacking = true
-	match last_direction:
-		"front":
-			animation.animation = "load"
-		"back", "left", "right", "stop":
-			animation.animation = "attack2"
+	
+	var direction = velocity.normalized()
+	
+	if direction.y > 0:
+		animation.animation = "load"  # ataque frente
+	elif direction.y < 0 or direction.x != 0:
+		animation.animation = "attack2"  # ataque trás ou lateral
+	else:
+		animation.animation = "attack2"
+
 	animation.play()
-	await animation.animation_finished
+	await get_tree().create_timer(0.4).timeout
 	is_attacking = false
+	play_animation(velocity.normalized())
+
  
 
 
