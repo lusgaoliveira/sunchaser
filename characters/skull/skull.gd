@@ -16,14 +16,10 @@ func _ready():
 
 func _set_player():
 	var players = get_tree().get_nodes_in_group("player")
-	print("Tentando achar player, achou:", players.size())
-	for p in players:
-		print("Player encontrado:", p.name, p.global_position)
 
 	if players.size() > 0:
 		player = players[0]
 	else:
-		print("Nenhum player encontrado. Tentando de novo em breve.")
 		call_deferred("_set_player")
 
 		
@@ -45,13 +41,13 @@ func _attack():
 		can_attack = false
 		$AttackArea.monitoring = true
 		animation.play("attack")
-		await get_tree().create_timer(0.4).timeout  # Tempo da animação
+		await get_tree().create_timer(0.4).timeout  
 		$AttackArea.monitoring = false
 		can_attack = true
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player") and can_attack:
-		body.take_damage(10)  # Chama a função no player
+		body.take_damage(10)  
 
 func take_damage(value: int) -> void:
 	current_life -= value

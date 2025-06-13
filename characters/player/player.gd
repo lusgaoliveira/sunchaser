@@ -1,14 +1,18 @@
 extends CharacterBody2D
 
 @onready var animation := $AnimatedSprite2D as AnimatedSprite2D
+@onready var barra_de_vida: ProgressBar = $ProgressBar
 
 const SPEED = 150.0
 
 var last_direction := ""
+var max_health := 100
 var health := 100
 var is_attacking := false
 
 func _ready() -> void:
+	barra_de_vida.max_value = max_health
+	barra_de_vida.value = health
 	add_to_group("player")
 
 func _physics_process(_delta) -> void:
@@ -63,11 +67,10 @@ func perform_attack() -> void:
 	is_attacking = false
 	play_animation(velocity.normalized())
 
- 
-
-
 func take_damage(amount: int) -> void:
 	health -= amount
+	barra_de_vida.value = health
+
 	print("Player tomou dano! Vida atual: %d" % health)
 	if health <= 0:
 		die()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://2hx2pketj4tr"]
+[gd_scene load_steps=81 format=3 uid="uid://2hx2pketj4tr"]
 
 [ext_resource type="Script" uid="uid://vcq340twyk3c" path="res://characters/player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cd8b5e8jnuqym" path="res://sprites/characters/bartender/s1.png" id="2_3t07l"]
@@ -553,6 +553,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t07l"]
+bg_color = Color(0.976471, 0.164706, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_on558"]
+bg_color = Color(0.203858, 0.603782, 0, 1)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(6, -14)
 script = ExtResource("1_onrkg")
@@ -573,4 +579,13 @@ position = Vector2(-6.25121, 1.50314)
 scale = Vector2(0.169312, 0.268066)
 skew = 0.0174533
 sprite_frames = SubResource("SpriteFrames_di0ei")
-animation = &"attack1"
+animation = &"left"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -21.0
+offset_top = -31.0
+offset_right = 8.0
+offset_bottom = -24.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3t07l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_on558")
+show_percentage = false
