@@ -441,4 +441,9 @@ target_position = Vector2(-50, 0)
 [node name="Left" type="RayCast2D" parent="."]
 target_position = Vector2(50, 0)
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+value = 100.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
