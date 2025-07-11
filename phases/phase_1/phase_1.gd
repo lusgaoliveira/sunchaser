@@ -61,16 +61,22 @@ var _dialog_data: Dictionary = {
 
 const MAX_SKULLS := 35
 var skulls_per_batch := 3
-var spawn_interval := 8.0  
+var spawn_interval := 8.0
 
 var skulls_to_spawn := MAX_SKULLS
 var timer_spawn := Timer.new()
 
 func _ready() -> void:
+	if _hud == null:
+		_hud = get_node_or_null("HUD")
+		if _hud == null:
+			_hud = CanvasLayer.new()
+			add_child(_hud)
+
 	var dialog_screen: DialogScreen = _DIALOG_SCREEN.instantiate()
 	dialog_screen.data = _dialog_data
 	_hud.add_child(dialog_screen)
-	
+
 	add_child(timer_spawn)
 	timer_spawn.wait_time = spawn_interval
 	timer_spawn.connect("timeout", Callable(self, "_on_timer_spawn_timeout"))
@@ -84,10 +90,41 @@ func _on_timer_spawn_timeout() -> void:
 	var batch_count = min(skulls_per_batch, skulls_to_spawn)
 	for i in range(batch_count):
 		var skull_instance = SKULL_SCENE.instantiate()
-		skull_instance.position = Vector2(
-			randf_range(0, 700),
-			randf_range(0, 700)
-		)
-
+		skull_instance.position = get_valid_spawn_position()
 		skulls_parent.add_child(skull_instance)
 		skulls_to_spawn -= 1
+
+func get_valid_spawn_position() -> Vector2:
+	var spawn_area = skulls_parent.get_node_or_null("SpawnArea")
+	if spawn_area:
+		var collision_shape = spawn_area.get_node_or_null("CollisionShape2D")
+		if collision_shape:
+			var shape = collision_shape.shape
+			if shape is RectangleShape2D:
+				var extents = shape.extents
+				for attempt in range(10):
+					var pos = Vector2(
+						randf_range(-extents.x + 40, extents.x - 40),
+						randf_range(-extents.y + 40, extents.y - 40)
+					) + spawn_area.global_position
+					
+					if not is_position_occupied(pos):
+						return pos
+				# fallback
+				return spawn_area.global_position
+	return skulls_parent.global_position
+
+func is_position_occupied(pos: Vector2) -> bool:
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	
+	var shape = RectangleShape2D.new()
+	shape.extents = Vector2(32, 32) 
+	
+	query.shape = shape
+	query.transform = Transform2D(0, pos)
+	query.collide_with_bodies = true
+	query.collide_with_areas = true
+
+	var result = space_state.intersect_shape(query)
+	return result.size() > 0

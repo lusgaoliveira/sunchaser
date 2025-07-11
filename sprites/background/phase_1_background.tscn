@@ -2278,17 +2278,17 @@ shape = SubResource("RectangleShape2D_p2r2i")
 [node name="DownWall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DownWall"]
-position = Vector2(677, 761)
+position = Vector2(681, 773)
 shape = SubResource("RectangleShape2D_ifonu")
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
-position = Vector2(10, 394)
+position = Vector2(-2, 394)
 shape = SubResource("RectangleShape2D_hlya1")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
-position = Vector2(1349, 404)
+position = Vector2(1376, 404)
 shape = SubResource("RectangleShape2D_ql6tu")

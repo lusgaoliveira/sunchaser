@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 @onready var animation := $AnimatedSprite2D as AnimatedSprite2D
 @onready var attack_area: Area2D = $hitbox
-@onready var barra_de_vida: ProgressBar = $ProgressBar
+@onready var barra_de_vida: ProgressBar = $barra_de_vida
+@onready var barra_de_sol: ProgressBar = $barra_de_sol
 
 const SPEED = 150.0
 
@@ -13,9 +14,16 @@ var is_attacking := false
 var knockback_velocity := Vector2.ZERO
 var is_knockback := false
 
+var max_sun_energy := 100
+var sun_energy := 100
+
 func _ready() -> void:
 	barra_de_vida.max_value = max_health
 	barra_de_vida.value = health
+	
+	barra_de_sol.max_value = max_sun_energy
+	barra_de_sol.value = sun_energy
+	
 	add_to_group("player")
 
 func _physics_process(_delta) -> void:
@@ -38,7 +46,12 @@ func _physics_process(_delta) -> void:
 		perform_attack()
 		
 	if Input.is_action_just_pressed("recover_health") and not is_attacking and not is_knockback:
-		recover_health(15)  
+		if sun_energy >= 10:
+			recover_health(15)  
+			use_sun_energy(10)
+		
+	if Input.is_action_just_pressed("recover_sun_energy") and not is_attacking:
+		recover_sun(10)
 
 
 
@@ -67,7 +80,7 @@ func perform_attack() -> void:
 
 	# Toca animação
 	if velocity.y > 0:
-		animation.animation = "load"
+		animation.animation = "attack"
 	elif velocity.y < 0 or velocity.x != 0:
 		animation.animation = "attack"
 	else:
@@ -104,17 +117,27 @@ func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:
 
 	# Aplica knockback
 	var dir = (global_position - attacker_pos).normalized()
-	apply_knockback(dir * 200)
+	apply_knockback(dir * 100)
 
 	if health <= 0:
 		die()
 
-
+func use_sun_energy(amount: int):
+	sun_energy -= amount
+	barra_de_sol.value = sun_energy
+	
 func recover_health(amount: int) -> void:
 	health = min(health + amount, max_health)  # não passa do máximo
 	barra_de_vida.value = health
 	print("Player recuperou vida! Vida atual: %d" % health)
 	animation.animation = "recover_health"
+	animation.play()
+
+func recover_sun(amount: int) -> void:
+	sun_energy = min(sun_energy + amount, max_sun_energy)  
+	barra_de_sol.value = sun_energy
+	print("Player recuperou a energia!: %d" % sun_energy)
+	animation.animation = "recover_sun_energy"
 	animation.play()
 	
 func die() -> void:
