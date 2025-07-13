@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal skull_died
+
 @export var velocidade := 60
 @onready var animation := $AnimatedSprite2D
 @onready var attack_area := $Area2D  
@@ -98,4 +100,5 @@ func die() -> void:
 	animation.animation = anim_aleatoria
 	animation.play()
 	await get_tree().create_timer(1.5).timeout
+	emit_signal("skull_died", self)
 	queue_free()

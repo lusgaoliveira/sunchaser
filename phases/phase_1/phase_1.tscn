@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://gg58bcvo0xff"]
+[gd_scene load_steps=7 format=3 uid="uid://gg58bcvo0xff"]
 
 [ext_resource type="PackedScene" uid="uid://dyfjiinq6dhm3" path="res://sprites/background/phase_1_background.tscn" id="1_8bjbs"]
 [ext_resource type="Script" uid="uid://dn1brp1i3j1x" path="res://phases/phase_1/phase_1.gd" id="1_hmrey"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://2hx2pketj4tr" path="res://characters/player/player.tscn" id="3_m7xbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hmrey"]
-size = Vector2(711, 368.25)
+size = Vector2(641.786, 325.59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xbk"]
+size = Vector2(246.253, 34.5031)
 
 [node name="PhaseOne" type="Node2D" node_paths=PackedStringArray("_hud", "skulls_parent")]
 script = ExtResource("1_hmrey")
@@ -26,12 +29,24 @@ script = ExtResource("3_hmrey")
 
 [node name="SkullsParent" type="Node2D" parent="."]
 position = Vector2(580, 250)
+scale = Vector2(0.709122, 0.683736)
 
 [node name="SpawnArea" type="Area2D" parent="SkullsParent"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SkullsParent/SpawnArea"]
-position = Vector2(94.5, 66.875)
+position = Vector2(129.107, 88.2049)
 shape = SubResource("RectangleShape2D_hmrey")
 
 [node name="Player" parent="." instance=ExtResource("3_m7xbk")]
 position = Vector2(1245, 45)
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(664, 738)
+scale = Vector2(0.965256, 0.985722)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(-9.32379, -3.04346)
+scale = Vector2(1.00127, 1.35252)
+shape = SubResource("RectangleShape2D_m7xbk")
+
+[connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]

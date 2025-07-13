@@ -58,13 +58,16 @@ var _dialog_data: Dictionary = {
 @export_category("Objects")
 @export var _hud: CanvasLayer = null
 @export var skulls_parent: Node2D = null
+@export var exit_area: Area2D = null
 
-const MAX_SKULLS := 35
+const MAX_SKULLS := 6
 var skulls_per_batch := 3
 var spawn_interval := 8.0
 
 var skulls_to_spawn := MAX_SKULLS
 var timer_spawn := Timer.new()
+
+var skulls_alive := []
 
 func _ready() -> void:
 	if _hud == null:
@@ -81,6 +84,11 @@ func _ready() -> void:
 	timer_spawn.wait_time = spawn_interval
 	timer_spawn.connect("timeout", Callable(self, "_on_timer_spawn_timeout"))
 	timer_spawn.start()
+	
+	if exit_area:
+		exit_area.connect("body_entered", Callable(self, "_on_exit_area_body_entered"))
+		exit_area.visible = false
+		exit_area.monitoring = false
 
 func _on_timer_spawn_timeout() -> void:
 	if skulls_to_spawn <= 0:
@@ -92,6 +100,11 @@ func _on_timer_spawn_timeout() -> void:
 		var skull_instance = SKULL_SCENE.instantiate()
 		skull_instance.position = get_valid_spawn_position()
 		skulls_parent.add_child(skull_instance)
+
+		# sinal de morte do skull
+		skull_instance.connect("skull_died", Callable(self, "_on_skull_died"))
+		skulls_alive.append(skull_instance)
+
 		skulls_to_spawn -= 1
 
 func get_valid_spawn_position() -> Vector2:
@@ -128,3 +141,24 @@ func is_position_occupied(pos: Vector2) -> bool:
 
 	var result = space_state.intersect_shape(query)
 	return result.size() > 0
+
+func _on_skull_died(skull):
+	skulls_alive.erase(skull)
+	if skulls_alive.size() == 0 and skulls_to_spawn == 0:
+		_on_all_skulls_killed()
+		
+func _on_all_skulls_killed():
+	print("Todos os skulls foram mortos!")
+	if exit_area:
+		print("Liberando área de saída...")
+		exit_area.visible = true  
+		exit_area.set_deferred("monitoring", true)
+
+
+func _on_exit_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		print("Carregando próxima fase...")
+		call_deferred("_go_to_next_phase")
+
+func _go_to_next_phase():
+	get_tree().change_scene_to_file("res://phases/phase_2/phase_2.tscn")
