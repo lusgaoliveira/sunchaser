@@ -18,6 +18,12 @@ var max_sun_energy := 100
 var sun_energy := 100
 
 func _ready() -> void:
+	
+	# Restaura a vida e posição do player a partir do GameState
+	health = GameState.player_stats.get("health", health)
+	sun_energy = GameState.player_stats.get("sun_energy", sun_energy)
+	
+	
 	barra_de_vida.max_value = max_health
 	barra_de_vida.value = health
 	
@@ -142,4 +148,8 @@ func recover_sun(amount: int) -> void:
 	
 func die() -> void:
 	queue_free()
-	
+
+func save_state():
+	GameState.player_stats["health"] = health
+	GameState.player_stats["sun_energy"] = sun_energy
+	GameState.player_stats["position"] = global_position

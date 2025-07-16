@@ -60,7 +60,7 @@ var _dialog_data: Dictionary = {
 @export var skulls_parent: Node2D = null
 @export var exit_area: Area2D = null
 
-const MAX_SKULLS := 6
+const MAX_SKULLS := 3
 var skulls_per_batch := 3
 var spawn_interval := 8.0
 
@@ -161,4 +161,14 @@ func _on_exit_area_body_entered(body: Node2D) -> void:
 		call_deferred("_go_to_next_phase")
 
 func _go_to_next_phase():
+	var player = get_node_or_null("Player")  # caminho relativo ao nó da fase
+	if player:
+		GameState.player_stats["health"] = player.health
+		GameState.player_stats["position"] = player.global_position
+		
+	var music = get_node_or_null("Music")  # caminho relativo ao nó da fase
+	if music:
+		GameState.music_position = music.get_playback_position()
+		GameState.music_stream = music.stream
+
 	get_tree().change_scene_to_file("res://phases/phase_2/phase_2.tscn")

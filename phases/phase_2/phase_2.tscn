@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://pdebcy1ylmm4"]
+[gd_scene load_steps=5 format=3 uid="uid://pdebcy1ylmm4"]
+
+[ext_resource type="Script" uid="uid://b8k80dc20qcrg" path="res://phases/phase_2/phase_2.gd" id="1_1216j"]
+[ext_resource type="PackedScene" uid="uid://dib5lyu3xwu8v" path="res://sprites/background/phase_2_background.tscn" id="1_nhwcx"]
+[ext_resource type="PackedScene" uid="uid://2hx2pketj4tr" path="res://characters/player/player.tscn" id="3_yhi7h"]
+[ext_resource type="Script" uid="uid://7biw1uj3mg1t" path="res://phases/phase_1/background_music_player.gd" id="4_htuam"]
 
 [node name="Phase2" type="Node2D"]
+script = ExtResource("1_1216j")
+
+[node name="phase_1_background" parent="." instance=ExtResource("1_nhwcx")]
+
+[node name="Player" parent="." instance=ExtResource("3_yhi7h")]
+position = Vector2(714, 64)
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.987665, 1.00838)
+volume_db = 10.0
+autoplay = true
+script = ExtResource("4_htuam")
