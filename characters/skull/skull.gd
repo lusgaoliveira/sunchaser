@@ -87,7 +87,7 @@ func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:
 	barra_de_vida.value = health
 
 	var dir = (global_position - attacker_pos).normalized()
-	apply_knockback(dir * 200)
+	apply_knockback(dir * 220)
 
 	if health <= 0:
 		die()

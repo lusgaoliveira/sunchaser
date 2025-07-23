@@ -88,7 +88,7 @@ func perform_attack() -> void:
 	if velocity.y > 0:
 		animation.animation = "attack"
 	elif velocity.y < 0 or velocity.x != 0:
-		animation.animation = "attack"
+		animation.animation = "attack2"
 	else:
 		animation.animation = "attack"
 
@@ -97,7 +97,6 @@ func perform_attack() -> void:
 	attack_area.monitoring = true
 	await get_tree().create_timer(0.1).timeout
 
-	# Aplica dano a quem estiver na área
 	for body in attack_area.get_overlapping_bodies():
 		if body.is_in_group("skulls"):
 			body.take_damage(25, global_position)  
@@ -105,7 +104,7 @@ func perform_attack() -> void:
 	attack_area.monitoring = false
 
 	# Espera fim da animação
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(1).timeout
 	is_attacking = false
 	play_animation(velocity.normalized())
 
@@ -123,7 +122,7 @@ func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:
 
 	# Aplica knockback
 	var dir = (global_position - attacker_pos).normalized()
-	apply_knockback(dir * 100)
+	apply_knockback(dir * 220)
 
 	if health <= 0:
 		die()
