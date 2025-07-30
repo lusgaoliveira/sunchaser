@@ -11,6 +11,26 @@
 radius = 36.0
 height = 130.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk2gs"]
+atlas = ExtResource("5_vrckj")
+region = Rect2(404, 36, 396, 382)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4apv"]
+atlas = ExtResource("5_vrckj")
+region = Rect2(8, 418, 396, 382)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sgvd"]
+atlas = ExtResource("2_tams4")
+region = Rect2(600, 0, 200, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lpx6"]
+atlas = ExtResource("2_tams4")
+region = Rect2(200, 266, 200, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1b2v2"]
+atlas = ExtResource("2_tams4")
+region = Rect2(400, 532, 200, 266)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1ebb"]
 atlas = ExtResource("6_q35lt")
 region = Rect2(200, 0, 200, 266)
@@ -39,17 +59,9 @@ region = Rect2(200, 0, 200, 266)
 atlas = ExtResource("2_tams4")
 region = Rect2(400, 0, 200, 266)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5sgvd"]
-atlas = ExtResource("2_tams4")
-region = Rect2(600, 0, 200, 266)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_5f0to"]
 atlas = ExtResource("2_tams4")
 region = Rect2(0, 266, 200, 266)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7lpx6"]
-atlas = ExtResource("2_tams4")
-region = Rect2(200, 266, 200, 266)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ioyo2"]
 atlas = ExtResource("2_tams4")
@@ -66,10 +78,6 @@ region = Rect2(0, 532, 200, 266)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yblv3"]
 atlas = ExtResource("2_tams4")
 region = Rect2(200, 532, 200, 266)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1b2v2"]
-atlas = ExtResource("2_tams4")
-region = Rect2(400, 532, 200, 266)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u87j5"]
 atlas = ExtResource("2_tams4")
@@ -111,14 +119,6 @@ region = Rect2(404, 448, 396, 351)
 atlas = ExtResource("5_vrckj")
 region = Rect2(8, 36, 396, 382)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bk2gs"]
-atlas = ExtResource("5_vrckj")
-region = Rect2(404, 36, 396, 382)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b4apv"]
-atlas = ExtResource("5_vrckj")
-region = Rect2(8, 418, 396, 382)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_35m4v"]
 atlas = ExtResource("5_vrckj")
 region = Rect2(404, 418, 396, 382)
@@ -157,6 +157,31 @@ region = Rect2(600, 532, 200, 266)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ruift"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk2gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4apv")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sgvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lpx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1b2v2")
+}],
+"loop": true,
+"name": &"attack1",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d1ebb")
@@ -306,6 +331,57 @@ animations = [{
 "loop": true,
 "name": &"front",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml4bx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05e41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fu3nw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3wwd")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1b2v2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u87j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojuq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk2gs")
+}],
+"loop": true,
+"name": &"load",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml4bx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05e41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fu3nw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3wwd")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
 }]
 
 [node name="Demon" type="CharacterBody2D"]
@@ -318,3 +394,5 @@ shape = SubResource("CapsuleShape2D_racfh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(305, 102)
 sprite_frames = SubResource("SpriteFrames_ruift")
+animation = &"load"
+flip_h = true

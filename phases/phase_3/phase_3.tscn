@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwmvq1mk2r1x"]
+
+[ext_resource type="Script" uid="uid://bkh0564gwntc4" path="res://phases/phase_3/phase_3.gd" id="1_3uqmt"]
+[ext_resource type="PackedScene" uid="uid://bfchnca6st3b7" path="res://sprites/background/phase_3_background.tscn" id="1_tl64u"]
+[ext_resource type="Script" uid="uid://7biw1uj3mg1t" path="res://phases/phase_1/background_music_player.gd" id="3_3uqmt"]
+[ext_resource type="PackedScene" uid="uid://2hx2pketj4tr" path="res://characters/player/player.tscn" id="3_q7j0k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7j0k"]
+size = Vector2(641.786, 325.59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7or0i"]
+size = Vector2(246.253, 34.5031)
+
+[node name="Phase3" type="Node2D" node_paths=PackedStringArray("skulls_parent", "exit_area")]
+script = ExtResource("1_3uqmt")
+skulls_parent = NodePath("SkullsParent")
+exit_area = NodePath("ExitArea")
+
+[node name="phase_1_background" parent="." instance=ExtResource("1_tl64u")]
+
+[node name="Player" parent="." instance=ExtResource("3_q7j0k")]
+position = Vector2(714, 64)
+
+[node name="SkullsParent" type="Node2D" parent="."]
+position = Vector2(580, 250)
+scale = Vector2(0.709122, 0.683736)
+
+[node name="SpawnArea" type="Area2D" parent="SkullsParent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SkullsParent/SpawnArea"]
+position = Vector2(129.107, 88.2049)
+shape = SubResource("RectangleShape2D_q7j0k")
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(664, 738)
+scale = Vector2(0.965256, 0.985722)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(-9.32379, -3.04346)
+scale = Vector2(1.00127, 1.35252)
+shape = SubResource("RectangleShape2D_7or0i")
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.987665, 1.00838)
+volume_db = 10.0
+autoplay = true
+script = ExtResource("3_3uqmt")

@@ -11,10 +11,11 @@ size = Vector2(641.786, 325.59)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7xbk"]
 size = Vector2(246.253, 34.5031)
 
-[node name="PhaseOne" type="Node2D" node_paths=PackedStringArray("_hud", "skulls_parent")]
+[node name="PhaseOne" type="Node2D" node_paths=PackedStringArray("_hud", "skulls_parent", "exit_area")]
 script = ExtResource("1_hmrey")
 _hud = NodePath("HUD")
 skulls_parent = NodePath("SkullsParent")
+exit_area = NodePath("ExitArea")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -43,6 +44,8 @@ position = Vector2(1245, 45)
 [node name="ExitArea" type="Area2D" parent="."]
 position = Vector2(664, 738)
 scale = Vector2(0.965256, 0.985722)
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
 position = Vector2(-9.32379, -3.04346)

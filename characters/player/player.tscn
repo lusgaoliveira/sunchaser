@@ -343,13 +343,13 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_bakn2")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_gro5v")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_5rrwf")
 }, {
 "duration": 1.0,
@@ -357,7 +357,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack",
-"speed": 12.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,

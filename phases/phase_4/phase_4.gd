@@ -1,59 +1,6 @@
 extends Node2D
-class_name PhaseOne
 
-const _DIALOG_SCREEN: PackedScene = preload("res://phases/phase_1/dialogue1.tscn")
 const SKULL_SCENE: PackedScene = preload("res://characters/skull/skull.tscn")  # troque aqui para o caminho do seu Skull.tscn
-
-var _dialog_data: Dictionary = {
-	0: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander1.png",
-		"dialog": "Os demônios estao roubando as almas das pessoas mortas!",
-		"title": "Padre Leusas"
-	},
-	1: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander2.png",
-		"dialog": "Coletando seu poder espitural com o objetivo de atacar os ceus, destruindo o plano humano no processo",
-		"title": "Padre Leusas"
-	},
-	2: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander4.png",
-		"dialog": "O cemiterio de LongWood foi atacado! A alma da sua esposa pode ja estar em pose dos demonios",
-		"title": "Padre Leusas"
-	},
-	3: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander3.png",
-		"dialog": "MALDITOS DEMONIOS!! IREI ME VINGAR!!",
-		"title": "Shai"
-	},
-	4: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/sha6.png",
-		"dialog": "IREI RECUPERAR A ALMA DELA E IREI MASSACRAR ESSES DEMONIOS",
-		"title": "Shai"
-	},
-	5: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai11.png",
-		"dialog": "VOLTAREI A CACAR E ELIMINAREI TODOS OS DEMONIOS EM NOME DE DEUS",
-		"title": "Shai"
-	},
-	
-	6: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai14.png",
-		"dialog": "ELES ENFRENTARAM A MINHA IRA!!!",
-		"title": "Shai"
-	},
-	
-	7: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai13.png",
-		"dialog": "Irei descer ao inferno pela ultima vez",
-		"title": "Shai"
-	},
-	
-	8: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai15.png",
-		"dialog": "ELES SEREM ENCINERADOS E QUEIMADAS PELO BRILHO DO SOL QUE NOS AQUECE!!!!",
-		"title": "Shai"
-	},
-}
 
 @export_category("Objects")
 @export var _hud: CanvasLayer = null
@@ -68,28 +15,21 @@ var skulls_to_spawn := MAX_SKULLS
 var timer_spawn := Timer.new()
 
 var skulls_alive := []
-
-func _ready() -> void:
-	if _hud == null:
-		_hud = get_node_or_null("HUD")
-		if _hud == null:
-			_hud = CanvasLayer.new()
-			add_child(_hud)
-
-	var dialog_screen: DialogScreen = _DIALOG_SCREEN.instantiate()
-	dialog_screen.data = _dialog_data
-	_hud.add_child(dialog_screen)
-
+func _ready():
+	var music = get_node_or_null("Music")
+	if music and GameState.music_stream:
+		music.stream = GameState.music_stream
+		music.play(GameState.music_position)
+		
 	add_child(timer_spawn)
 	timer_spawn.wait_time = spawn_interval
 	timer_spawn.connect("timeout", Callable(self, "_on_timer_spawn_timeout"))
 	timer_spawn.start()
 	
-	if exit_area and not exit_area.is_connected("body_entered", Callable(self, "_on_exit_area_body_entered")):
+	if exit_area:
 		exit_area.connect("body_entered", Callable(self, "_on_exit_area_body_entered"))
 		exit_area.visible = false
 		exit_area.monitoring = false
-		print("Sinal body_entered conectado por código (ready)!")
 
 func _on_timer_spawn_timeout() -> void:
 	if skulls_to_spawn <= 0:
@@ -152,29 +92,10 @@ func _on_all_skulls_killed():
 	print("Todos os skulls foram mortos!")
 	if exit_area:
 		print("Liberando área de saída...")
-		exit_area.visible = true
-		exit_area.monitoring = true
-		
-		# Verifica se o player já está dentro
-		print("Verificar se o player ja ta na area")
-		var player = get_node_or_null("Player")
-		print("Player encontrado?", player != null)
+		exit_area.visible = true  
+		exit_area.set_deferred("monitoring", true)
 
-		if player:
-			print("Buscando corpos sobre o exit_area...")
-			var bodies = exit_area.get_overlapping_bodies()
-			print("Corpos encontrados:", bodies)
-			for b in bodies:
-				print(" -", b.name, "Grupos:", b.get_groups())
-
-			if bodies.has(player):
-				print("Player já está dentro da área!")
-				_on_exit_area_body_entered(player)
-			else:
-				print("Player NÃO está na área.")
-		
 func _on_exit_area_body_entered(body: Node2D) -> void:
-	print("Aqui chegou")
 	if body.is_in_group("player"):
 		print("Carregando próxima fase...")
 		call_deferred("_go_to_next_phase")
@@ -191,4 +112,4 @@ func _go_to_next_phase():
 		GameState.music_position = music.get_playback_position()
 		GameState.music_stream = music.stream
 
-	get_tree().change_scene_to_file("res://phases/phase_2/phase_2.tscn")
+	get_tree().change_scene_to_file("res://phases/phase_5/phase_5s.tscn")	

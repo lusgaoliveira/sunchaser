@@ -95,7 +95,7 @@ func perform_attack() -> void:
 	animation.play()
 
 	attack_area.monitoring = true
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.020).timeout
 
 	for body in attack_area.get_overlapping_bodies():
 		if body.is_in_group("skulls"):
