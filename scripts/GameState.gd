@@ -2,8 +2,8 @@ extends Node
 
 var player_stats = {
 	"health": 100,
-	"position": Vector2.ZERO,
-	"sun_energy": 100
+	"sun_energy": 100,
+	"postition": Vector2.ZERO
 }
 
 var music_position := 0.0

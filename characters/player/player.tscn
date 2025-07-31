@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://2hx2pketj4tr"]
+[gd_scene load_steps=83 format=3 uid="uid://2hx2pketj4tr"]
 
 [ext_resource type="Script" uid="uid://vcq340twyk3c" path="res://characters/player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cd8b5e8jnuqym" path="res://sprites/characters/bartender/s1.png" id="2_3t07l"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cabulj2eg7sld" path="res://sprites/characters/bartender/s10.png" id="9_d2agh"]
 [ext_resource type="Texture2D" uid="uid://drwpbq4ua60uh" path="res://sprites/characters/bartender/s8.png" id="10_fpo3a"]
 [ext_resource type="Texture2D" uid="uid://dvcp45nmiavqo" path="res://sprites/characters/bartender/s9.png" id="11_kyfeq"]
+[ext_resource type="AudioStream" uid="uid://btm7ta28k061c" path="res://assets/player_sounds/jailson.mp3" id="12_on558"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 16.0
@@ -633,3 +634,7 @@ offset_bottom = -27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_gqopd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_icpky")
 show_percentage = false
+
+[node name="hit_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_on558")
+volume_db = 0.5

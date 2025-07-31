@@ -79,11 +79,9 @@ func _ready() -> void:
 	var dialog_screen: DialogScreen = _DIALOG_SCREEN.instantiate()
 	dialog_screen.data = _dialog_data
 	_hud.add_child(dialog_screen)
-
-	add_child(timer_spawn)
-	timer_spawn.wait_time = spawn_interval
-	timer_spawn.connect("timeout", Callable(self, "_on_timer_spawn_timeout"))
-	timer_spawn.start()
+	
+	# sinal de finalizaca o do dialgogo
+	dialog_screen.connect("dialog_finished", Callable(self, "_on_dialog_finished"))
 	
 	if exit_area and not exit_area.is_connected("body_entered", Callable(self, "_on_exit_area_body_entered")):
 		exit_area.connect("body_entered", Callable(self, "_on_exit_area_body_entered"))
@@ -91,6 +89,12 @@ func _ready() -> void:
 		exit_area.monitoring = false
 		print("Sinal body_entered conectado por código (ready)!")
 
+func _on_dialog_finished() -> void:
+	add_child(timer_spawn)
+	timer_spawn.wait_time = spawn_interval
+	timer_spawn.connect("timeout", Callable(self, "_on_timer_spawn_timeout"))
+	timer_spawn.start()
+	
 func _on_timer_spawn_timeout() -> void:
 	if skulls_to_spawn <= 0:
 		timer_spawn.stop()
@@ -183,7 +187,7 @@ func _go_to_next_phase():
 	var player = get_node_or_null("Player")  # caminho relativo ao nó da fase
 	if player:
 		GameState.player_stats["health"] = player.health
-		GameState.player_stats["position"] = player.global_position
+		GameState.player_stats["sun_energy"] = player.sun_energy
 		GameState.player_stats["position"] = player.global_position
 		
 	var music = get_node_or_null("Music")  # caminho relativo ao nó da fase

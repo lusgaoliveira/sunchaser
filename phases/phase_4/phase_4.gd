@@ -104,7 +104,7 @@ func _go_to_next_phase():
 	var player = get_node_or_null("Player")  # caminho relativo ao nó da fase
 	if player:
 		GameState.player_stats["health"] = player.health
-		GameState.player_stats["position"] = player.global_position
+		GameState.player_stats["sun_energy"] = player.sun_energy 
 		GameState.player_stats["position"] = player.global_position
 		
 	var music = get_node_or_null("Music")  # caminho relativo ao nó da fase
@@ -112,4 +112,4 @@ func _go_to_next_phase():
 		GameState.music_position = music.get_playback_position()
 		GameState.music_stream = music.stream
 
-	get_tree().change_scene_to_file("res://phases/phase_5/phase_5s.tscn")	
+	get_tree().change_scene_to_file("res://phases/phase_5/phase_5.tscn")	

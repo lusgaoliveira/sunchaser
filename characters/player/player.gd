@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var attack_area: Area2D = $hitbox
 @onready var barra_de_vida: ProgressBar = $barra_de_vida
 @onready var barra_de_sol: ProgressBar = $barra_de_sol
-
+@onready var hit_sound := $hit_sound
 const SPEED = 150.0
 
 var last_direction := ""
@@ -123,6 +123,9 @@ func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:
 	# Aplica knockback
 	var dir = (global_position - attacker_pos).normalized()
 	apply_knockback(dir * 220)
+	
+	if hit_sound:
+		hit_sound.play()
 
 	if health <= 0:
 		die()

@@ -2,6 +2,7 @@ extends Control
 
 class_name DialogScreen
 
+signal dialog_finished
 var _step: float = 0.05
 
 var _id: int = 0
@@ -25,6 +26,7 @@ func _process(_delta) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		_id += 1
 		if _id == data.size():
+			dialog_finished.emit()
 			queue_free()
 			return
 		_initialize_dialog()
