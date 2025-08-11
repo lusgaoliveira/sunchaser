@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c47544kd4id4v"]
+
+[ext_resource type="FontFile" uid="uid://bwn8h3kamoyvx" path="res://assets/fonts/good timing bd.otf" id="1_nixot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frq1j"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsgte"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lb50s"]
+bg_color = Color(0.960784, 0.85098, 0, 1)
+
+[resource]
+default_font_size = 36
+Button/fonts/font = ExtResource("1_nixot")
+Button/styles/disabled = null
+Button/styles/hover = SubResource("StyleBoxFlat_frq1j")
+Button/styles/normal = SubResource("StyleBoxFlat_jsgte")
+Button/styles/pressed = SubResource("StyleBoxFlat_lb50s")

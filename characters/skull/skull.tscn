@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://b8bwcjpxhmt65"]
+[gd_scene load_steps=60 format=3 uid="uid://b8bwcjpxhmt65"]
 
 [ext_resource type="Texture2D" uid="uid://gohrmff4ea34" path="res://sprites/characters/skull/e1s.png" id="1_2igwj"]
 [ext_resource type="Script" uid="uid://c8lf3ui5hprgx" path="res://characters/skull/skull.gd" id="1_usud0"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://x1m1ncr7ogq3" path="res://sprites/characters/skull/ewalk1s.png" id="6_84kp3"]
 [ext_resource type="Texture2D" uid="uid://kberbetsh62s" path="res://sprites/characters/skull/ewalk2s.png" id="7_fjm45"]
 [ext_resource type="Texture2D" uid="uid://cylcqtkpwtisi" path="res://sprites/characters/skull/ewalk4s.png" id="8_nklwu"]
+[ext_resource type="AudioStream" uid="uid://bqeh5fqiw8srh" path="res://assets/player_sounds/skulls/run_skulls.mp3" id="10_dalb3"]
+[ext_resource type="AudioStream" uid="uid://dctfv7cxfo13e" path="res://assets/player_sounds/skulls/made_damage.mp3" id="11_n8okg"]
+[ext_resource type="AudioStream" uid="uid://djdu42ttxabr2" path="res://assets/player_sounds/skulls/take_damage.mp3" id="12_kjdv8"]
+[ext_resource type="AudioStream" uid="uid://duwd7es24rk3w" path="res://assets/player_sounds/skulls/die.mp3" id="13_84kp3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_usud0"]
 
@@ -445,5 +449,22 @@ target_position = Vector2(50, 0)
 offset_right = 4.0
 offset_bottom = 27.0
 value = 100.0
+
+[node name="som_setar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_dalb3")
+max_distance = 145.0
+
+[node name="som_ataque" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_n8okg")
+max_distance = 145.0
+
+[node name="som_dano" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_kjdv8")
+max_distance = 145.0
+attenuation = 1.86606
+
+[node name="som_morte" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_84kp3")
+max_distance = 145.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

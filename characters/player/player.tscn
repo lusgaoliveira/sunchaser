@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cabulj2eg7sld" path="res://sprites/characters/bartender/s10.png" id="9_d2agh"]
 [ext_resource type="Texture2D" uid="uid://drwpbq4ua60uh" path="res://sprites/characters/bartender/s8.png" id="10_fpo3a"]
 [ext_resource type="Texture2D" uid="uid://dvcp45nmiavqo" path="res://sprites/characters/bartender/s9.png" id="11_kyfeq"]
-[ext_resource type="AudioStream" uid="uid://btm7ta28k061c" path="res://assets/player_sounds/jailson.mp3" id="12_on558"]
+[ext_resource type="AudioStream" uid="uid://bbxc0d8x8gaic" path="res://assets/player_sounds/player/damage.mp3" id="12_on558"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 16.0

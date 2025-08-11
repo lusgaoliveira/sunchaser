@@ -23,8 +23,8 @@ func play_musica(index: int):
 	stream = musicas[index]
 	play()
 
-func avancar_musica():
+func avancar_musica():  
 	musica_atual += 1
 	if musica_atual >= musicas.size():
-		musica_atual = 0  # reinicia o álbum
+		print("ok")
 	play_musica(musica_atual)

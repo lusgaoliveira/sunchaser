@@ -1,7 +1,7 @@
 extends Node2D
 class_name PhaseOne
 
-const _DIALOG_SCREEN: PackedScene = preload("res://phases/phase_1/dialogue1.tscn")
+const _DIALOG_SCREEN: PackedScene = preload("res://phases/dialogue/dialogue1.tscn")
 const SKULL_SCENE: PackedScene = preload("res://characters/skull/skull.tscn")  # troque aqui para o caminho do seu Skull.tscn
 
 var _dialog_data: Dictionary = {
@@ -35,19 +35,16 @@ var _dialog_data: Dictionary = {
 		"dialog": "VOLTAREI A CACAR E ELIMINAREI TODOS OS DEMONIOS EM NOME DE DEUS",
 		"title": "Shai"
 	},
-	
 	6: {
 		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai14.png",
 		"dialog": "ELES ENFRENTARAM A MINHA IRA!!!",
 		"title": "Shai"
 	},
-	
 	7: {
 		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai13.png",
 		"dialog": "Irei descer ao inferno pela ultima vez",
 		"title": "Shai"
 	},
-	
 	8: {
 		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai15.png",
 		"dialog": "ELES SEREM ENCINERADOS E QUEIMADAS PELO BRILHO DO SOL QUE NOS AQUECE!!!!",
@@ -70,6 +67,7 @@ var timer_spawn := Timer.new()
 var skulls_alive := []
 
 func _ready() -> void:
+	# Configura HUD
 	if _hud == null:
 		_hud = get_node_or_null("HUD")
 		if _hud == null:
@@ -79,10 +77,13 @@ func _ready() -> void:
 	var dialog_screen: DialogScreen = _DIALOG_SCREEN.instantiate()
 	dialog_screen.data = _dialog_data
 	_hud.add_child(dialog_screen)
-	
-	# sinal de finalizaca o do dialgogo
+
+
 	dialog_screen.connect("dialog_finished", Callable(self, "_on_dialog_finished"))
-	
+
+
+
+	# Conecta área de saída
 	if exit_area and not exit_area.is_connected("body_entered", Callable(self, "_on_exit_area_body_entered")):
 		exit_area.connect("body_entered", Callable(self, "_on_exit_area_body_entered"))
 		exit_area.visible = false
@@ -94,7 +95,7 @@ func _on_dialog_finished() -> void:
 	timer_spawn.wait_time = spawn_interval
 	timer_spawn.connect("timeout", Callable(self, "_on_timer_spawn_timeout"))
 	timer_spawn.start()
-	
+
 func _on_timer_spawn_timeout() -> void:
 	if skulls_to_spawn <= 0:
 		timer_spawn.stop()
@@ -184,13 +185,13 @@ func _on_exit_area_body_entered(body: Node2D) -> void:
 		call_deferred("_go_to_next_phase")
 
 func _go_to_next_phase():
-	var player = get_node_or_null("Player")  # caminho relativo ao nó da fase
+	var player = get_node_or_null("Player") 
 	if player:
 		GameState.player_stats["health"] = player.health
 		GameState.player_stats["sun_energy"] = player.sun_energy
 		GameState.player_stats["position"] = player.global_position
 		
-	var music = get_node_or_null("Music")  # caminho relativo ao nó da fase
+	var music = get_node_or_null("Music") 
 	if music:
 		GameState.music_position = music.get_playback_position()
 		GameState.music_stream = music.stream

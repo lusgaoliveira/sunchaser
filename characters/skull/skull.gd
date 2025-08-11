@@ -7,6 +7,12 @@ signal skull_died
 @onready var attack_area := $Area2D  
 @onready var barra_de_vida: ProgressBar = $barra_de_vida
 
+@onready var som_ataque := $som_ataque
+@onready var som_dano := $som_dano
+@onready var som_morte := $som_morte
+@onready var som_setar := $som_setar
+
+
 var knockback_velocity := Vector2.ZERO
 var is_knockback := false
 var is_dead := false
@@ -15,12 +21,14 @@ var health := 100
 var player: Node2D = null
 var can_attack := true
 
+
 func _ready():
 	randomize()
 	add_to_group("skulls")
 	await get_tree().process_frame  
+	som_setar.play()
 	_set_player()
-
+	
 func _set_player():
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
@@ -63,14 +71,16 @@ func _attack():
 		can_attack = false
 		attack_area.monitoring = true
 		animation.play("attack")
+		som_ataque.play()
 		await get_tree().create_timer(0.4).timeout  
+
 		attack_area.monitoring = false
 		can_attack = true
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player") and can_attack and not is_dead:
 		body.take_damage(5, global_position)
-		
+   		
 func apply_knockback(force: Vector2) -> void:
 	if is_dead:
 		return
@@ -82,10 +92,11 @@ func apply_knockback(force: Vector2) -> void:
 func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:
 	if is_dead:
 		return
-
+	
 	health -= amount
 	barra_de_vida.value = health
-
+	
+	som_dano.play()
 	var dir = (global_position - attacker_pos).normalized()
 	apply_knockback(dir * 220)
 
@@ -100,5 +111,6 @@ func die() -> void:
 	animation.animation = anim_aleatoria
 	animation.play()
 	await get_tree().create_timer(1.5).timeout
+	som_morte.play()
 	emit_signal("skull_died", self)
 	queue_free()

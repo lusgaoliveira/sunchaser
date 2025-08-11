@@ -98,7 +98,7 @@ func perform_attack() -> void:
 	await get_tree().create_timer(0.020).timeout
 
 	for body in attack_area.get_overlapping_bodies():
-		if body.is_in_group("skulls"):
+		if body.is_in_group("skulls") or body.is_in_group("demons"):
 			body.take_damage(25, global_position)  
 
 	attack_area.monitoring = false

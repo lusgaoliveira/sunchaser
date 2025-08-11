@@ -20,42 +20,34 @@ var health := 1000
 var player: Node2D = null
 var can_attack := true
 
-# Função para adicionar o demônio ao grupo
 func _ready():
 	randomize()
-	add_to_group("demon")
+	add_to_group("demons")
 	barra_de_vida.max_value = max_health
 	barra_de_vida.value = health
+	attack_area.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
 	await get_tree().process_frame
 	_set_player()
 
-# Identifica o player
 func _set_player():
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		player = players[0]
 
-# Ataque
 func _attack():
 	if can_attack and not is_dead and is_instance_valid(player):
 		can_attack = false
-
-		# Verificar mana, se quiser usar no futuro
-		# if barra_de_mana.value < 10:
-		#     animation.animation = "load"
-		#     animation.play()
-		#     return
-
+		attack_area.monitoring = true
 		animation.play("attack")
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.3).timeout # tempo do hit real
+		attack_area.monitoring = false
 		can_attack = true
 
-# Detecta se o player entrou na área de ataque
+
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player") and can_attack and not is_dead:
 		body.take_damage(25, global_position)
 
-# Aplica knockback após levar dano
 func apply_knockback(force: Vector2) -> void:
 	if is_dead:
 		return
@@ -64,7 +56,6 @@ func apply_knockback(force: Vector2) -> void:
 	await get_tree().create_timer(0.15).timeout
 	is_knockback = false
 
-# Recebe dano
 func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:
 	if is_dead:
 		return
@@ -78,23 +69,22 @@ func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:
 	if health <= 0:
 		die()
 
-# Morre e executa animação aleatória
 func die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO
-	var mortes = ["fall1", "fall2"]
-	var anim_aleatoria = mortes[randi() % mortes.size()]
-	animation.animation = anim_aleatoria
+
+	animation.animation = "fall"
 	animation.play()
 	await get_tree().create_timer(1.5).timeout
-	emit_signal("skull_died", self)
 	queue_free()
 
-# Movimento e ataque
 func _physics_process(_delta) -> void:
 	if is_dead:
 		velocity = Vector2.ZERO
 		return
+
+	# Ajusta profundidade visual
+	z_index = int(global_position.y)
 
 	if is_knockback:
 		velocity = knockback_velocity
@@ -108,7 +98,7 @@ func _physics_process(_delta) -> void:
 		if distancia > 10:
 			velocity = direcao.normalized() * velocidade
 
-			# Animação com flip horizontal para "right"
+			# Animação com flip horizontal para "left" ou "right"
 			if abs(direcao.x) > abs(direcao.y):
 				animation.animation = "left"
 				animation.flip_h = direcao.x > 0
@@ -118,6 +108,9 @@ func _physics_process(_delta) -> void:
 
 			animation.play()
 		else:
+			# Reposiciona levemente para trás do player antes de atacar
+			var backstep = -direcao.normalized() * 5
+			global_position += backstep
 			velocity = Vector2.ZERO
 			_attack()
 

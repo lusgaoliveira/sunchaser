@@ -3,7 +3,6 @@ extends Node2D
 const SKULL_SCENE: PackedScene = preload("res://characters/skull/skull.tscn")  # troque aqui para o caminho do seu Skull.tscn
 
 @export_category("Objects")
-@export var _hud: CanvasLayer = null
 @export var skulls_parent: Node2D = null
 @export var exit_area: Area2D = null
 

@@ -314,6 +314,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vu86q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu86q")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_x3cav")
 }, {
 "duration": 1.0,
@@ -409,7 +420,7 @@ shape = SubResource("CapsuleShape2D_racfh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(289, 102)
 sprite_frames = SubResource("SpriteFrames_ruift")
-animation = &"left"
+animation = &"fall"
 
 [node name="barra_de_vida" type="ProgressBar" parent="."]
 offset_left = 170.0

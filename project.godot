@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Shadowchaser"
-run/main_scene="uid://gg58bcvo0xff"
+run/main_scene="uid://b0yx0rrpxosub"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
