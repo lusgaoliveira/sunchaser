@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://chfnuljunsemm"]
+[gd_scene load_steps=53 format=3 uid="uid://chfnuljunsemm"]
 
 [ext_resource type="Script" uid="uid://b7ltffxscil88" path="res://characters/demon/demon.gd" id="1_de4pj"]
 [ext_resource type="Texture2D" uid="uid://dne1vfnkqaibh" path="res://sprites/characters/demon/d1.png" id="2_tams4"]
@@ -402,7 +402,7 @@ bg_color = Color(0.976471, 0.164706, 0, 1)
 bg_color = Color(0.203858, 0.603782, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4cb5y"]
-radius = 132.095
+radius = 471.717
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cb5y"]
 bg_color = Color(0.990233, 1, 0.978992, 1)
@@ -410,7 +410,24 @@ bg_color = Color(0.990233, 1, 0.978992, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrckj"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="CurveTexture" id="CurveTexture_tams4"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tams4"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 168.54
+initial_velocity_max = 350.36
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 17.11
+collision_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tams4"]
+radius = 472.179
+
 [node name="Demon" type="CharacterBody2D"]
+position = Vector2(338, 235)
 script = ExtResource("1_de4pj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -418,7 +435,7 @@ position = Vector2(314, 150)
 shape = SubResource("CapsuleShape2D_racfh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(289, 102)
+position = Vector2(300, 118)
 sprite_frames = SubResource("SpriteFrames_ruift")
 animation = &"fall"
 
@@ -432,9 +449,10 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_uqv80")
 show_percentage = false
 
 [node name="hitbox" type="Area2D" parent="."]
+position = Vector2(279, 117)
 
 [node name="Collision" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(301, 114)
+position = Vector2(17, 19)
 shape = SubResource("CircleShape2D_4cb5y")
 
 [node name="barra_de_mana" type="ProgressBar" parent="."]
@@ -445,3 +463,23 @@ offset_bottom = -12.0
 theme_override_styles/background = SubResource("StyleBoxFlat_4cb5y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vrckj")
 show_percentage = false
+
+[node name="magic_particles" type="GPUParticles2D" parent="."]
+position = Vector2(282, 113)
+emitting = false
+amount = 100
+sub_emitter = NodePath(".")
+texture = SubResource("CurveTexture_tams4")
+lifetime = 0.6
+one_shot = true
+trail_lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_tams4")
+
+[node name="magic_explosion_area" type="Area2D" parent="."]
+position = Vector2(301, 116)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="magic_explosion_area"]
+position = Vector2(16, 29)
+shape = SubResource("CircleShape2D_tams4")

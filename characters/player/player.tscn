@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://2hx2pketj4tr"]
+[gd_scene load_steps=88 format=3 uid="uid://2hx2pketj4tr"]
 
 [ext_resource type="Script" uid="uid://vcq340twyk3c" path="res://characters/player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cd8b5e8jnuqym" path="res://sprites/characters/bartender/s1.png" id="2_3t07l"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c2cdboy68m2fe" path="res://sprites/characters/bartender/s4.png" id="7_8l73k"]
 [ext_resource type="Texture2D" uid="uid://lgsi81pp0veb" path="res://sprites/characters/bartender/s6.png" id="8_aqrcq"]
 [ext_resource type="Texture2D" uid="uid://cabulj2eg7sld" path="res://sprites/characters/bartender/s10.png" id="9_d2agh"]
+[ext_resource type="Texture2D" uid="uid://bcog08jdpnnrn" path="res://sprites/characters/bartender/dead.png" id="9_gqopd"]
 [ext_resource type="Texture2D" uid="uid://drwpbq4ua60uh" path="res://sprites/characters/bartender/s8.png" id="10_fpo3a"]
 [ext_resource type="Texture2D" uid="uid://dvcp45nmiavqo" path="res://sprites/characters/bartender/s9.png" id="11_kyfeq"]
 [ext_resource type="AudioStream" uid="uid://bbxc0d8x8gaic" path="res://assets/player_sounds/player/damage.mp3" id="12_on558"]
@@ -140,6 +141,22 @@ region = Rect2(250, 250, 250, 250)
 [sub_resource type="AtlasTexture" id="AtlasTexture_i1mdy"]
 atlas = ExtResource("4_gqopd")
 region = Rect2(500, 250, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icpky"]
+atlas = ExtResource("9_gqopd")
+region = Rect2(250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58jvb"]
+atlas = ExtResource("9_gqopd")
+region = Rect2(0, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l73k"]
+atlas = ExtResource("9_gqopd")
+region = Rect2(0, 250, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqrcq"]
+atlas = ExtResource("9_gqopd")
+region = Rect2(250, 250, 250, 250)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4hjhg"]
 atlas = ExtResource("4_gqopd")
@@ -399,6 +416,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_icpky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58jvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l73k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqrcq")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4hjhg")
 }, {
 "duration": 1.0,
@@ -607,9 +641,7 @@ position = Vector2(-6.25121, 1.50314)
 scale = Vector2(0.169312, 0.268066)
 skew = 0.0174533
 sprite_frames = SubResource("SpriteFrames_di0ei")
-animation = &"attack"
-frame = 1
-frame_progress = 0.742787
+animation = &"front"
 
 [node name="barra_de_vida" type="ProgressBar" parent="."]
 offset_left = -21.0

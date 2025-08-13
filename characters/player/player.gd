@@ -149,6 +149,9 @@ func recover_sun(amount: int) -> void:
 	animation.play()
 	
 func die() -> void:
+	animation.animation = "dead"
+	animation.play()
+	await get_tree().create_timer(1).timeout
 	queue_free()
 
 func save_state():
