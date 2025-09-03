@@ -57,8 +57,8 @@ var _dialog_data: Dictionary = {
 @export var skulls_parent: Node2D = null
 @export var exit_area: Area2D = null
 
-const MAX_SKULLS := 3
-var skulls_per_batch := 3
+const MAX_SKULLS := 1
+var skulls_per_batch := 1
 var spawn_interval := 8.0
 
 var skulls_to_spawn := MAX_SKULLS

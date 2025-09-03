@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://chfnuljunsemm"]
+[gd_scene load_steps=57 format=3 uid="uid://chfnuljunsemm"]
 
 [ext_resource type="Script" uid="uid://b7ltffxscil88" path="res://characters/demon/demon.gd" id="1_de4pj"]
 [ext_resource type="Texture2D" uid="uid://dne1vfnkqaibh" path="res://sprites/characters/demon/d1.png" id="2_tams4"]
@@ -402,7 +402,7 @@ bg_color = Color(0.976471, 0.164706, 0, 1)
 bg_color = Color(0.203858, 0.603782, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4cb5y"]
-radius = 471.717
+radius = 205.879
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cb5y"]
 bg_color = Color(0.990233, 1, 0.978992, 1)
@@ -410,21 +410,31 @@ bg_color = Color(0.990233, 1, 0.978992, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrckj"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tams4"]
+
+[sub_resource type="Curve" id="Curve_uqv80"]
+_data = [Vector2(0.601036, 0.550562), 0.0, 0.0, 0, 0]
+point_count = 1
+
 [sub_resource type="CurveTexture" id="CurveTexture_tams4"]
+curve = SubResource("Curve_uqv80")
+
+[sub_resource type="Gradient" id="Gradient_tams4"]
+offsets = PackedFloat32Array(0, 0.2, 0.3, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.871429, 0.871429, 0.871429, 1, 0.1, 0.1, 0.1, 1, 0.357143, 0.357143, 0.357143, 1, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uqv80"]
+gradient = SubResource("Gradient_tams4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tams4"]
-lifetime_randomness = 0.2
+lifetime_randomness = 0.5
 particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 168.54
-initial_velocity_max = 350.36
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -2.23517e-06
-radial_accel_max = 17.11
-collision_mode = 2
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_uqv80")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tams4"]
-radius = 472.179
+radius = 328.002
 
 [node name="Demon" type="CharacterBody2D"]
 position = Vector2(338, 235)
@@ -446,6 +456,7 @@ offset_right = 429.0
 offset_bottom = -42.0
 theme_override_styles/background = SubResource("StyleBoxFlat_tams4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_uqv80")
+max_value = 400.0
 show_percentage = false
 
 [node name="hitbox" type="Area2D" parent="."]
@@ -462,9 +473,11 @@ offset_right = 429.0
 offset_bottom = -12.0
 theme_override_styles/background = SubResource("StyleBoxFlat_4cb5y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vrckj")
+max_value = 250.0
 show_percentage = false
 
 [node name="magic_particles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_tams4")
 position = Vector2(282, 113)
 emitting = false
 amount = 100
@@ -481,5 +494,5 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="magic_explosion_area"]
-position = Vector2(16, 29)
+position = Vector2(-3, 33)
 shape = SubResource("CircleShape2D_tams4")

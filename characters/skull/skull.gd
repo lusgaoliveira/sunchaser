@@ -24,6 +24,7 @@ var can_attack := true
 
 func _ready():
 	randomize()
+	attack_area.monitoring = true
 	add_to_group("skulls")
 	await get_tree().process_frame  
 	som_setar.play()
@@ -50,9 +51,9 @@ func _physics_process(_delta) -> void:
 		var direcao := player.global_position - global_position
 		var distancia := direcao.length()
 
-		if distancia > 10:
+		if distancia > 25:
 			velocity = direcao.normalized() * velocidade
-
+			
 			# Definir animação de movimento
 			if abs(direcao.x) > abs(direcao.y):
 				animation.animation = "right" if direcao.x > 0 else "left"
@@ -62,17 +63,16 @@ func _physics_process(_delta) -> void:
 			animation.play()
 		else:
 			velocity = Vector2.ZERO
+			can_attack = true
 			_attack()
 
 		move_and_slide()
-
+	
 func _attack():
 	if can_attack and not is_dead:
-		can_attack = false
 		attack_area.monitoring = true
-		animation.play("attack")
 		som_ataque.play()
-		await get_tree().create_timer(0.4).timeout  
+		await get_tree().create_timer(0.1).timeout  
 
 		attack_area.monitoring = false
 		can_attack = true
@@ -86,7 +86,7 @@ func apply_knockback(force: Vector2) -> void:
 		return
 	knockback_velocity = force
 	is_knockback = true
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.20).timeout
 	is_knockback = false
 
 func take_damage(amount: int, attacker_pos: Vector2 = global_position) -> void:

@@ -1,60 +1,8 @@
 extends Node2D
 
 const SKULL_SCENE: PackedScene = preload("res://characters/skull/skull.tscn")  # troque aqui para o caminho do seu Skull.tscn
-#const _DIALOG_SCREEN: PackedScene = preload("res://phases/phase_1/dialogue1.tscn")
 
-var _dialog_data: Dictionary = {
-	0: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander1.png",
-		"dialog": "Os demônios estao roubando as almas das pessoas mortas!",
-		"title": "Padre Leusas"
-	},
-	1: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander2.png",
-		"dialog": "Coletando seu poder espitural com o objetivo de atacar os ceus, destruindo o plano humano no processo",
-		"title": "Padre Leusas"
-	},
-	2: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander4.png",
-		"dialog": "O cemiterio de LongWood foi atacado! A alma da sua esposa pode ja estar em pose dos demonios",
-		"title": "Padre Leusas"
-	},
-	3: {
-		"faceset": "res://sprites/characters/bartender/dialogue/alessander/alessander3.png",
-		"dialog": "MALDITOS DEMONIOS!! IREI ME VINGAR!!",
-		"title": "Shai"
-	},
-	4: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/sha6.png",
-		"dialog": "IREI RECUPERAR A ALMA DELA E IREI MASSACRAR ESSES DEMONIOS",
-		"title": "Shai"
-	},
-	5: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai11.png",
-		"dialog": "VOLTAREI A CACAR E ELIMINAREI TODOS OS DEMONIOS EM NOME DE DEUS",
-		"title": "Shai"
-	},
-	
-	6: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai14.png",
-		"dialog": "ELES ENFRENTARAM A MINHA IRA!!!",
-		"title": "Shai"
-	},
-	
-	7: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai13.png",
-		"dialog": "Irei descer ao inferno pela ultima vez",
-		"title": "Shai"
-	},
-	
-	8: {
-		"faceset": "res://sprites/characters/bartender/dialogue/shai/shai15.png",
-		"dialog": "ELES SEREM ENCINERADOS E QUEIMADAS PELO BRILHO DO SOL QUE NOS AQUECE!!!!",
-		"title": "Shai"
-	},
-}
 @export_category("Objects")
-@export var _hud: CanvasLayer = null
 @export var skulls_parent: Node2D = null
 @export var exit_area: Area2D = null
 

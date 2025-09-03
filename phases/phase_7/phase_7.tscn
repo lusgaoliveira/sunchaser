@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqgy58o7cqw1r"]
+
+[ext_resource type="Script" uid="uid://darigr1qbknj" path="res://phases/phase_7/phase_7.gd" id="1_70oyt"]
+[ext_resource type="PackedScene" uid="uid://bf1vdnw2ab8mx" path="res://sprites/background/phase_7_background.tscn" id="1_gpjs5"]
+[ext_resource type="PackedScene" uid="uid://2hx2pketj4tr" path="res://characters/player/player.tscn" id="2_prmyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prmyp"]
+size = Vector2(246.253, 34.5031)
+
+[node name="Phase7" type="Node2D" node_paths=PackedStringArray("exit_area")]
+script = ExtResource("1_70oyt")
+exit_area = NodePath("ExitArea")
+
+[node name="phase_7_background" parent="." instance=ExtResource("1_gpjs5")]
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(664, 738)
+scale = Vector2(0.965256, 0.985722)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(-3.10801, -12.1738)
+scale = Vector2(1.00127, 1.35252)
+shape = SubResource("RectangleShape2D_prmyp")
+
+[node name="Player" parent="." instance=ExtResource("2_prmyp")]
+position = Vector2(927, 34)
+
+[connection signal="body_entered" from="ExitArea" to="Player" method="_on_exit_area_body_entered"]

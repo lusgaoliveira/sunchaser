@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuxsgwsp8wkw5"]
+
+[ext_resource type="Script" uid="uid://cuhkmptlyoc3a" path="res://phases/phase_8/phase_8.gd" id="1_fh4tc"]
+[ext_resource type="PackedScene" uid="uid://dub88hi844sbx" path="res://sprites/background/phase_8_background.tscn" id="1_stvee"]
+[ext_resource type="PackedScene" uid="uid://2hx2pketj4tr" path="res://characters/player/player.tscn" id="2_17dok"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fh4tc"]
+size = Vector2(246.253, 34.5031)
+
+[node name="Phase8" type="Node2D" node_paths=PackedStringArray("exit_area")]
+script = ExtResource("1_fh4tc")
+exit_area = NodePath("ExitArea")
+
+[node name="phase_8_background" parent="." instance=ExtResource("1_stvee")]
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(664, 738)
+scale = Vector2(0.965256, 0.985722)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(-3.10801, -12.1738)
+scale = Vector2(1.00127, 1.35252)
+shape = SubResource("RectangleShape2D_fh4tc")
+
+[node name="Player" parent="." instance=ExtResource("2_17dok")]
+position = Vector2(659, 43)

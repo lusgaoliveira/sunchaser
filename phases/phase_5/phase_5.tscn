@@ -26,7 +26,7 @@ position = Vector2(547, 85)
 scale = Vector2(0.709122, 0.683736)
 
 [node name="SpawnArea" type="Area2D" parent="SkullsParent"]
-position = Vector2(52.1772, 138.943)
+position = Vector2(52.1772, 140.406)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SkullsParent/SpawnArea"]
 position = Vector2(162.172, 128.705)

@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://sql66g2kak1y"]
+
+[ext_resource type="PackedScene" uid="uid://cqc1djqlehawo" path="res://sprites/background/phase_6_background.tscn" id="1_blrki"]
+[ext_resource type="Script" uid="uid://cki7e66tb1xbv" path="res://phases/phase_6/phase_6.gd" id="1_dtdy4"]
+[ext_resource type="PackedScene" uid="uid://2hx2pketj4tr" path="res://characters/player/player.tscn" id="2_i3ney"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtdy4"]
+size = Vector2(246.253, 34.5031)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_blrki"]
+size = Vector2(115.969, 208.076)
+
+[sub_resource type="GDScript" id="GDScript_q6yw7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3ney"]
+size = Vector2(104, 117.312)
+
+[node name="Phase6" type="Node2D" node_paths=PackedStringArray("_hud", "skulls_parent", "cdemon_parent", "exit_area")]
+script = ExtResource("1_dtdy4")
+_hud = NodePath("HUD")
+skulls_parent = NodePath("SkullsParent")
+cdemon_parent = NodePath("CDemonParent")
+exit_area = NodePath("ExitArea")
+
+[node name="phase_6_background" parent="." instance=ExtResource("1_blrki")]
+
+[node name="Player" parent="." instance=ExtResource("2_i3ney")]
+position = Vector2(927, 34)
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(651, 751)
+scale = Vector2(0.965256, 0.985722)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(-7.25199, -20.2896)
+scale = Vector2(1.00127, 1.35252)
+shape = SubResource("RectangleShape2D_dtdy4")
+
+[node name="SkullsParent" type="Node2D" parent="."]
+position = Vector2(595, 364)
+scale = Vector2(0.709122, 0.683736)
+
+[node name="SpawnArea" type="Area2D" parent="SkullsParent"]
+position = Vector2(-11.2816, 40.9515)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SkullsParent/SpawnArea"]
+position = Vector2(-392.034, -137.48)
+shape = SubResource("RectangleShape2D_blrki")
+
+[node name="CDemonParent" type="Node2D" parent="."]
+position = Vector2(286, 380)
+script = SubResource("GDScript_q6yw7")
+
+[node name="SpawnAreaC" type="Area2D" parent="CDemonParent"]
+position = Vector2(261, -42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CDemonParent/SpawnAreaC"]
+position = Vector2(384, -193)
+shape = SubResource("RectangleShape2D_i3ney")
+
+[node name="HUD" type="CanvasLayer" parent="."]

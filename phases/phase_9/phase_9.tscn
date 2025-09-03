@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg1sut1beau"]
+
+[ext_resource type="PackedScene" uid="uid://b2vt32ossf58d" path="res://sprites/background/phase_9_background.tscn" id="1_lyald"]
+[ext_resource type="PackedScene" uid="uid://h6l680543wbk" path="res://characters/jesus/jesus.tscn" id="2_dums1"]
+[ext_resource type="PackedScene" uid="uid://2hx2pketj4tr" path="res://characters/player/player.tscn" id="3_0ssfq"]
+
+[node name="Phase9" type="Node2D"]
+
+[node name="Phase9" parent="." instance=ExtResource("1_lyald")]
+position = Vector2(-51, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_0ssfq")]
+position = Vector2(668, 83)
+
+[node name="Jesus" parent="." instance=ExtResource("2_dums1")]
+position = Vector2(590, 438)
